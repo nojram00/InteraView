@@ -2,6 +2,11 @@ import { GameCanvas } from "@/components/game-canvas";
 import Wrapper from "@/components/wrapper";
 import { getQuizData } from "@/data/questions";
 
+export const metadata = {
+    title : "InteraView - Quiz",
+    description : "Quiz page"
+}
+
 export default async function QuizPage({
     searchParams
 } : {

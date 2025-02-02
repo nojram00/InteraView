@@ -2,6 +2,10 @@ import { TextInput, Dropdown } from "@/components/form-inputs"
 import { saveData } from "@/actions/dummy-actions"
 import Wrapper from "@/components/wrapper"
 
+export const metadata = {
+    title : "InteraView - Input",
+}
+
 export default function InputPage() {
 
     const options = [
