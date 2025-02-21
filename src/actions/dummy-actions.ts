@@ -1,11 +1,13 @@
 "use server"
 
 import { DataOutput } from "@/types/data-output"
+import axios from "axios"
 import { cookies } from "next/headers"
 
 export async function saveData(formdata : FormData) : Promise<void>
 {
     const data : DataOutput = {
+        student_id : formdata.get("student-id") as string,
         subject : formdata.get("subject") as string,
         written_works : {
             topic : formdata.get("written-works-topic") as string,
@@ -24,9 +26,15 @@ export async function saveData(formdata : FormData) : Promise<void>
         }
     }
 
-    const cookieData = await cookies();
+    console.log(`${process.env.SERVER_URL}/students-activity`);
+    const response = await axios.post(`${process.env.SERVER_URL}/students-activity`, data);
 
-    cookieData.set("data", JSON.stringify(data));
+    if(response.status !== 200)
+    {
+        console.error("Error saving data");
+    }
+
+    console.log(response.data);
 
 }
 

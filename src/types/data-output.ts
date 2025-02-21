@@ -1,4 +1,5 @@
 export type DataOutput = {
+    student_id : string;
     subject: string;
     written_works : {
         topic? : string;

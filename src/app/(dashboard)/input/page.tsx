@@ -1,6 +1,7 @@
 import { TextInput, Dropdown } from "@/components/form-inputs"
 import { saveData } from "@/actions/dummy-actions"
 import Wrapper from "@/components/wrapper"
+import StudentSelectionList from "./student-picker"
 
 export const metadata = {
     title : "InteraView - Input",
@@ -22,7 +23,8 @@ export default function InputPage() {
     return(
         <Wrapper>
             <form action={saveData} className="w-full flex flex-col gap-5 bg-gray-300 shadow-md p-5 rounded-md">
-                
+                <StudentSelectionList />
+
                 <Dropdown name="subject" label="Subject" options={options}/>
 
                 <div className="flex flex-col gap-4 w-full">
