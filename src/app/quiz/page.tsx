@@ -1,6 +1,7 @@
 import { GameCanvas } from "@/components/game-canvas";
 import Wrapper from "@/components/wrapper";
 import { getQuizData } from "@/data/questions";
+import QuitButton from "./quit-button";
 
 export const metadata = {
     title : "InteraView - Quiz",
@@ -20,6 +21,9 @@ export default async function QuizPage({
 
     const quizData = await getQuizData(subject);
 
+    console.log(quizData);
+    console.log(subject);
+
     if(!quizData)
     {
         return(
@@ -32,7 +36,7 @@ export default async function QuizPage({
     return(
         <Wrapper>
             <div className="min-h-screen relative bg-gray-800 flex flex-col items-center justify-center rounded-lg">
-                <button className="absolute -top-2 text-xl -right-5 bg-red-400 w-20 h-10 shadow-md rounded-sm">Quit</button>
+                <QuitButton />
                 <GameCanvas quiz={quizData} />
             </div>
         </Wrapper>
