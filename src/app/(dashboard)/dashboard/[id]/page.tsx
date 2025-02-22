@@ -11,8 +11,6 @@ export default async function({
     const { id } = await params;
     return(
         <div>
-            <h1>Student ID: {id}</h1>
-
             <MapData id={id}/>
         </div>
     )

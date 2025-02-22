@@ -4,10 +4,11 @@ import { DataOutput } from "@/types/data-output"
 import axios, { AxiosError } from "axios"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import { fetchServer } from "@/utils/fetchServer"
 
 export async function saveData(formdata : FormData)
 {
-    const data : DataOutput = {
+    const payload : DataOutput = {
         student_info : {
             first_name : formdata.get("first-name") as string,
             last_name : formdata.get("last-name") as string,
@@ -30,19 +31,23 @@ export async function saveData(formdata : FormData)
             items : Number(formdata.get("exam-items") ?? 0)
         }
     }
-
-    console.log(data);
     // return;
 
     console.log(`${process.env.SERVER_URL}/students-activity`);
-    const response = await axios.post(`${process.env.SERVER_URL}/students-activity`, data);
+    const {data, status} = await fetchServer<{ message : string;}>(`${process.env.SERVER_URL}/students-activity`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(payload)
+    })
 
-    if(response.status !== 200)
+    if(status !== 200)
     {
         console.error("Error saving data");
     }
 
-    console.log(response.data);
+    console.log(data);
 
 }
 
@@ -77,19 +82,27 @@ export async function search(prevState : any ,formdata : FormData)
         section : (formdata.get("section") as string).toUpperCase()
     }
 
-    const response = await axios.post(`${process.env.SERVER_URL}/students/find`, payload);
+    console.log(payload);
 
-    if(response.status !== 200)
+    const {data, status} = await fetchServer<{ id : string}>(`${process.env.SERVER_URL}/students/find`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(payload)
+    });
+
+    if(status !== 200)
     {
         console.error("Error searching for student");
 
         return {
             error : "Error searching for student",
-            code : response.status
+            code : status
         }
     }
 
-    const id = response.data.id;
+    const id = data.id;
 
     console.log(id);
 
