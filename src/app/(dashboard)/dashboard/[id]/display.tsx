@@ -1,9 +1,7 @@
 import getData from "@/data/get-data"
 import { DataBarGraph, DataPieGraph } from "@/components/charts";
 
-export default async function DataDisplay() {
-
-    const data = await getData();
+export default function DataDisplay({data} : { data : any }) {
 
     console.log(data);
     

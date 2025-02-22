@@ -1,0 +1,41 @@
+"use client";
+import React, { useActionState } from 'react';
+import { Dropdown, TextInput } from '@/components/form-inputs';
+import { search } from '@/actions/dummy-actions';
+
+export default function IdSearcher()
+{
+    const [state, action, pending] = useActionState(search, null)
+    const sections = [
+        {
+            name: "A",
+            value: "a"
+        },
+        {
+            name: "B",
+            value: "b"
+        },
+        {
+            name: "C",
+            value: "c"
+        },
+        {
+            name: "D",
+            value: "d"
+        },
+        {
+            name: "E",
+            value: "e"
+        }
+    ]
+    return(
+        <form action={action} className='gap-4 flex flex-col max-w-lg w-full bg-gray-500 p-4 rounded-md text-white shadow-sm mt-4'>
+            <TextInput label="First Name" name="firstname" type='text' />
+            <TextInput label="Last Name" name="lastname" type='text' />
+            <Dropdown label="Section" name="section" options={sections} />
+            <div className='w-full'>
+                <button disabled={pending} className="bg-blue-500 text-white p-2 rounded-md max-w-xs">{ pending ? "Searching..." : "Search"}</button>
+            </div>
+        </form>
+    )
+}
