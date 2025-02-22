@@ -1,11 +1,22 @@
 "use client";
-import React, { useActionState } from 'react';
+import React, { useActionState, useEffect } from 'react';
 import { Dropdown, TextInput } from '@/components/form-inputs';
 import { search } from '@/actions/dummy-actions';
 
 export default function IdSearcher()
 {
     const [state, action, pending] = useActionState(search, null)
+
+    useEffect(() => {
+        if(state)
+        {
+            if(state.code === 404)
+            {
+                alert("Student not found!");
+            }
+        }
+    }, [state])
+
     const sections = [
         {
             name: "A",
