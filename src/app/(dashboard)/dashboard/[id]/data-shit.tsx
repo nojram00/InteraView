@@ -3,6 +3,8 @@ import Wrapper from '@/components/wrapper';
 import useFetch from '@/hooks/useFetch';
 import React from 'react';
 import DataDisplay from './display';
+import getAverage from '@/utils/getAverage';
+import Suggestion from './display-suggetion';
 
 type Activity = {
     items : number;
@@ -48,6 +50,15 @@ export default function MapData({ id } : { id : string })
                         <p>Performance Tasks: {student.performance_tasks.score}/{student.performance_tasks.items}</p>
                         <p>Exams: {student.exams.score}/{student.exams.items}</p> */}
                         <DataDisplay data={student}/>
+                        {"Score Average: " + getAverage([student.written_works.score, student.performance_tasks.score, student.exams.score])} <br />
+                        {"Total Average: " + getAverage([student.written_works.items, student.performance_tasks.items, student.exams.items])}
+
+                        <div>
+                            <h2 className='font-bold text-lg mt-3'>Suggestions: </h2>
+                            <div className='flex flex-col p-4'>
+                                <Suggestion activity='Written Works' scoreAvg={student.written_works.score} itemAvg={student.written_works.items} subject={student.subject} />
+                            </div>
+                        </div>
                     </details>
                 ))}
             </div>
