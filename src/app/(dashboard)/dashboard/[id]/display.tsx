@@ -3,7 +3,7 @@ import { DataBarGraph, DataPieGraph } from "@/components/charts";
 
 export default function DataDisplay({data} : { data : any }) {
 
-    console.log(data);
+    console.log("data: ",data);
     
     if (data === null) {
         return (
@@ -20,11 +20,19 @@ export default function DataDisplay({data} : { data : any }) {
                     labels: ['Written Works', 'Performance Task', "Exam"],
                     datasets: [
                         {
-                            label: `Data for ${data.subject}`,
-                            data: [data.written_works.score, data.performance_tasks.score, data.exams.score],
-                            backgroundColor: ['rgba(255, 192, 203, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],
-                            borderColor: ['rgba(255, 192, 203, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                            type : 'bar',
+                            label: `Items for ${data.subject}`,
+                            data: [data.written_works.items, data.performance_tasks.items, data.exams.items],
+                            backgroundColor: ['rgba(255, 192, 203, 0.5)', ],
+                            borderColor: ['rgba(255, 192, 203, 1)'],
                             borderWidth: 1
+                        },
+                        {
+                            label: `Scores for ${data.subject}`,
+                            data: [data.written_works.score, data.performance_tasks.score, data.exams.score],
+                            backgroundColor: ['rgba(54, 162, 235, 0.5)'],
+                            borderColor: ['rgba(54, 162, 235, 1)'],
+                            borderWidth: 1,
                         }
                     ]
                 }

@@ -23,9 +23,9 @@ export default function DashboardLayout({ children } : { children : Readonly<Rea
                 <li className="nav-button">
                   <Link className="hover:underline" href="/students">Students</Link>
                 </li>
-                <li className="nav-button">
+                {/* <li className="nav-button">
                   <Link className="hover:underline" href="/suggestion">Suggetions</Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </aside>
