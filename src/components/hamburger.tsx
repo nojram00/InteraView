@@ -26,7 +26,7 @@ export default function Hamburger() {
                 <nav className="p-4">
                 <ul className="space-y-2 w-full text-sm">
                     <li className="nav-button">
-                        <Link className="hover:underline" href="/main">Dashboard</Link>
+                        <Link className="hover:underline" href="/dashboard">Dashboard</Link>
                     </li>
                     <li className="nav-button">
                         <Link className="hover:underline" href="/input">Input</Link>
