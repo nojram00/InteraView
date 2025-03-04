@@ -13,7 +13,7 @@ export default function Hamburger() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
-            <div className={`fixed h-full w-64 ${open ? 'left-0' : '-left-64'} top-0 bg-white transition-all duration-300 ease-in-out`}>
+            <div className={`fixed h-full w-64 ${open ? 'left-0' : '-left-64'} top-0 bg-gray-200 shadow-md transition-all duration-300 ease-in-out`}>
                 <div className='top-0 mt-5 flex gap-2 mx-4 items-center  text-black'>
                     <button onClick={() => setOpen(!open)} className='bg-gray-300 rounded-md p-1'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
