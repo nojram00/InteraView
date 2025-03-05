@@ -6,24 +6,20 @@ export default function StudentInfoForm()
 {
     const sections = [
         {
-            name: "A",
-            value: "a"
+            name: "Benevolence",
+            value: "benevolence"
         },
         {
-            name: "B",
-            value: "b"
+            name: "Prospherity",
+            value: "prospherity"
         },
         {
-            name: "C",
-            value: "c"
+            name: "Simplicity",
+            value: "simplicity"
         },
         {
-            name: "D",
-            value: "d"
-        },
-        {
-            name: "E",
-            value: "e"
+            name: "Courage",
+            value: "courage"
         }
     ]
     return(

@@ -1,45 +1,41 @@
 "use client";
 
 import Link from 'next/link';
-import {useRef } from 'react';
+import {useRef, useState } from 'react';
 
 export default function Hamburger() {
 
-    const dialog = useRef<HTMLDialogElement>(null);
-
-    const openDialog = () => {
-        dialog.current?.showModal();
-    }
-
-    const closeDialog = () => {
-        dialog.current?.close();
-    }
-
+   const [open, setOpen] = useState(false);
     return(
         <div className='block md:hidden'>
-            <button onClick={openDialog}>
+            <button onClick={() => setOpen(!open)} className="p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
-            <dialog ref={dialog} className="w-1/2 rounded-md shadow-md">
+            <div className={`fixed h-full w-64 ${open ? 'left-0' : '-left-64'} top-0 bg-gray-200 shadow-md transition-all duration-300 ease-in-out`}>
+                <div className='top-0 mt-5 flex gap-2 mx-4 items-center  text-black'>
+                    <button onClick={() => setOpen(!open)} className='bg-gray-300 rounded-md p-1'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    <span>Menu</span>
+                </div>
                 <nav className="p-4">
-                <ul className="space-y-2 w-full text-sm">
-                    <li className="nav-button">
-                        <Link className="hover:underline" href="/dashboard">Dashboard</Link>
-                    </li>
-                    <li className="nav-button">
-                        <Link className="hover:underline" href="/input">Input</Link>
-                    </li>
-                    <li className="nav-button">
-                        <Link className="hover:underline" href="/suggestion">Suggetions</Link>
-                    </li>
-                    <li>
-                        <button onClick={closeDialog}>Close</button>
-                    </li>
-                </ul>
+                    <ul className="space-y-2 w-full text-sm">
+                        <li className="nav-button">
+                            <Link onClick={() => setOpen(false)} className="hover:underline" href="/dashboard">Dashboard</Link>
+                        </li>
+                        <li className="nav-button">
+                            <Link onClick={() => setOpen(false)} className="hover:underline" href="/input">Input</Link>
+                        </li>
+                        <li className="nav-button">
+                            <Link onClick={() => setOpen(false)} className="hover:underline" href="/suggestion">Suggetions</Link>
+                        </li>
+                    </ul>
                 </nav>
-        </dialog>
+        </div>
         </div>
     )
 }
