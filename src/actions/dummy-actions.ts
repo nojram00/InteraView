@@ -6,7 +6,7 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { fetchServer } from "@/utils/fetchServer"
 
-export async function saveData(formdata : FormData)
+export async function saveData(prevState: any, formdata : FormData)
 {
     const payload : DataOutput = {
         student_info : {
@@ -44,11 +44,18 @@ export async function saveData(formdata : FormData)
 
     if(status !== 200)
     {
-        console.error("Error saving data");
+        return {
+            success : false,
+            code : status,
+            error : data.message
+        }
     }
 
-    console.log(data);
-
+    return {
+        success : true,
+        code : status,
+        message : data.message
+    }
 }
 
 export async function saveFinalScore(score : number) : Promise<void>
