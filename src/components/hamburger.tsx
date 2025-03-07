@@ -31,7 +31,7 @@ export default function Hamburger() {
                             <Link onClick={() => setOpen(false)} className="hover:underline" href="/input">Input</Link>
                         </li>
                         <li className="nav-button">
-                            <Link onClick={() => setOpen(false)} className="hover:underline" href="/suggestion">Suggetions</Link>
+                            <Link onClick={() => setOpen(false)} className="hover:underline" href="/students">Students</Link>
                         </li>
                     </ul>
                 </nav>

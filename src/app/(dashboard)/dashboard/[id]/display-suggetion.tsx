@@ -1,3 +1,4 @@
+import TakeQuizButton from "@/components/take-quiz-btn";
 import capitalize from "@/utils/capitalize";
 import Link from "next/link";
 
@@ -23,9 +24,7 @@ export default function Suggestion({ scoreAvg, itemAvg, activity, subject, topic
                     </span>
 
                     <div>
-                        <Link className="bg-blue-500 text-white p-2 rounded-md" href={`/quiz?subject=${subject}&topic=${topic}`}>
-                            Take a Quiz
-                        </Link>
+                        <TakeQuizButton subject={subject} topic={topic}/>
                     </div>
                     
                 </div>
