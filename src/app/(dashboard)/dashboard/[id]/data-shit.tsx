@@ -5,6 +5,7 @@ import React from 'react';
 import DataDisplay from './display';
 import getAverage from '@/utils/getAverage';
 import Suggestion from './display-suggetion';
+import LoadingSpinner from '@/components/loading-spinner';
 
 type Activity = {
     items : number;
@@ -38,13 +39,12 @@ export default function MapData({ id } : { id : string })
         <Wrapper>
             <h1>Student Data</h1>
             <div className='flex flex-col gap-4 w-full min-h-screen p-2'>
-                {loading && <p>Loading...</p>}
+                {loading && <LoadingSpinner />}
                 {error && <p>Error: {error}</p>}
                 {data && data.map(student => (
                     <details key={student.id} className='bg-gray-300 rounded-md p-4 shadow-md'>
                         <summary className='list-none cursor-pointer'>
                             <h2 className='uppercase font-bold hover:text-gray-500'>{student.subject}</h2>
-
                         </summary>
                         {/* <p>Written Works: {student.written_works.score}/{student.written_works.items}</p>
                         <p>Performance Tasks: {student.performance_tasks.score}/{student.performance_tasks.items}</p>
