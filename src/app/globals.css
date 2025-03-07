@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.table {
+    @apply w-full bg-gray-200 rounded-md mt-5 shadow-md;
+}
+
+.table-header th {
+    @apply p-2 font-semibold text-left;
+}
+
+.table-row td {
+    @apply p-2;
+}
+
+.pagination-btn svg {
+    @apply hover:text-gray-200;
+}
+
+.pagination-btn[disabled] {
+    @apply cursor-not-allowed;
+}
+
+.pagination-btn[disabled] svg {
+    @apply text-gray-400;
+}
