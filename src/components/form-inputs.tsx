@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent } from "react"
 
 export function TextInput({ name, label, type, onChange } : { name : string, label : string, type : string, onChange? : (e : ChangeEvent<HTMLInputElement>) => void }) {
