@@ -22,7 +22,7 @@ export default async function StudentTable({
 } : { page : number }){
     const { data, status } = await fetchServer<StudentTableProps>(`${process.env.SERVER_URL}/students?page=${page}`);
 
-    if(status !== 200)
+    if(status !== 200 || typeof data === "undefined" || data === null)
     {
         return(
             <div>
