@@ -8,6 +8,33 @@ import { fetchServer } from "@/utils/fetchServer"
 
 export async function saveData(prevState: any, formdata : FormData)
 {
+
+    const writtenWorks = (formdata.getAll("written-data") as string[]).map((data) => {
+        return (JSON.parse(data) as {
+            topic : string;
+            score : number;
+            items : number;
+        });
+    });
+
+    const performanceTasks = (formdata.getAll("perf-data") as string[]).map((data) => {
+        return (JSON.parse(data) as {
+            topic : string;
+            score : number;
+            items : number;
+        });
+    })
+
+    const exams = (formdata.getAll("exam-data") as string[]).map((data) => {
+        return (JSON.parse(data) as {
+            topic : string;
+            score : number;
+            items : number;
+        });
+    })
+
+    console.log(writtenWorks);
+
     const payload : DataOutput = {
         student_info : {
             first_name : formdata.get("first-name") as string,
@@ -15,22 +42,29 @@ export async function saveData(prevState: any, formdata : FormData)
             section : (formdata.get("section") as string).toUpperCase()
         },
         subject : formdata.get("subject") as string,
-        written_works : {
-            topic : formdata.get("written-works-topic") as string,
-            score : Number(formdata.get("written-works-score") ?? 0),
-            items : Number(formdata.get("written-works-items") ?? 0)
-        },
-        performance_tasks : {
-            topic : (formdata.get("perf-task-topic")) as string,
-            score : Number(formdata.get("perf-task-score") ?? 0),
-            items : Number(formdata.get("perf-task-items") ?? 0)
-        },
-        exams : {
-            topic : formdata.get("exam-topic") as string,
-            score : Number(formdata.get("exam-score") ?? 0),
-            items : Number(formdata.get("exam-items") ?? 0)
-        }
+        written_works : writtenWorks.map((data) => { 
+            return { 
+                topic : data.topic, 
+                score : Number(data.score), 
+                items : Number(data.items) 
+            }}),
+        performance_tasks : performanceTasks.map((data) => {
+            return { 
+                topic : data.topic, 
+                score : Number(data.score), 
+                items : Number(data.items) 
+            }
+        }),
+        exams : exams.map((data) => {
+            return { 
+                topic : data.topic, 
+                score : Number(data.score), 
+                items : Number(data.items) 
+            }
+        })
     }
+
+    console.log(payload);
     // return;
 
     console.log(`${process.env.SERVER_URL}/students-activity`);
@@ -47,14 +81,14 @@ export async function saveData(prevState: any, formdata : FormData)
         return {
             success : false,
             code : status,
-            error : data.message
+            error : data === null || typeof data === "undefined" ? "Error saving data" : data.message
         }
     }
 
     return {
         success : true,
         code : status,
-        message : data.message
+        message : data == null ? "Data saved successfully" : data.message
     }
 }
 
@@ -109,7 +143,7 @@ export async function search(prevState : any ,formdata : FormData)
         }
     }
 
-    const id = data.id;
+    const id = data?.id;
 
     console.log(id);
 

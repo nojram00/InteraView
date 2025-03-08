@@ -12,7 +12,7 @@ export default function Suggestion({ scoreAvg, itemAvg, activity, subject, topic
 {
 
     const passed = () => {
-        return itemAvg / 2 < scoreAvg;
+        return itemAvg / 2 <= scoreAvg;
     }
 
     return(

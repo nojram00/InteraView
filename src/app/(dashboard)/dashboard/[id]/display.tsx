@@ -1,7 +1,7 @@
 import getData from "@/data/get-data"
 import { DataBarGraph, DataPieGraph } from "@/components/charts";
 
-export default function DataDisplay({data} : { data : any }) {
+export default function DataDisplay({data, subject} : { data : any, subject : string }) {
 
     console.log("data: ",data);
     
@@ -17,19 +17,19 @@ export default function DataDisplay({data} : { data : any }) {
         <div className="flex flex-col gap-4 w-full min-h-screen">
             <DataBarGraph data={
                 {
-                    labels: ['Written Works', 'Performance Task', "Exam"],
+                    labels: data.map((activity : any) => activity.topic === "" ? "No Topic Name" : activity.topic),
                     datasets: [
                         {
                             type : 'bar',
-                            label: `Items for ${data.subject}`,
-                            data: [data.written_works.items, data.performance_tasks.items, data.exams.items],
+                            label: `Items for ${subject}`,
+                            data: data.map((activity : any) => activity.items),
                             backgroundColor: ['rgba(255, 192, 203, 0.5)', ],
                             borderColor: ['rgba(255, 192, 203, 1)'],
                             borderWidth: 1
                         },
                         {
-                            label: `Scores for ${data.subject}`,
-                            data: [data.written_works.score, data.performance_tasks.score, data.exams.score],
+                            label: `Scores for ${subject}`,
+                            data: data.map((activity : any) => activity.score),
                             backgroundColor: ['rgba(54, 162, 235, 0.5)'],
                             borderColor: ['rgba(54, 162, 235, 1)'],
                             borderWidth: 1,
@@ -40,11 +40,11 @@ export default function DataDisplay({data} : { data : any }) {
 
             <DataPieGraph data={
                 {
-                    labels: ['Written Works', 'Performance Task', "Exam"],
+                    labels: data.map((activity : any) => activity.topic === "" ? "No Topic Name" : activity.topic),
                     datasets: [
                         {
-                            label: `Data for ${data.subject}`,
-                            data: [data.written_works.score, data.performance_tasks.score, data.exams.score],
+                            label: `Score for ${subject}`,
+                            data: data.map((activity : any) => activity.score),
                             backgroundColor: ['rgba(255, 192, 203, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],
                             borderColor: ['rgba(255, 192, 203, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
                             borderWidth: 1
