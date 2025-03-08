@@ -3,7 +3,10 @@ import { TextInput, Dropdown } from "@/components/form-inputs"
 import { saveData } from "@/actions/dummy-actions"
 import StudentSelectionList from "./student-picker"
 import StudentInfoForm from "./student-info-form"
-import { useActionState, useEffect } from "react";
+import { Fragment, useActionState, useEffect, useState } from "react";
+import WrittenWorksField from "./fields/written-works";
+import PerfTaskField from "./fields/perf-tasks";
+import ExamField from "./fields/exams";
 
 export default function MainForm()
 {
@@ -20,6 +23,9 @@ export default function MainForm()
     ]
 
     const [state, action, pending] = useActionState(saveData, null);
+    const [fieldCountA , setFieldCountA] = useState(1);
+    const [fieldCountB , setFieldCountB] = useState(1);
+    const [fieldCountC , setFieldCountC] = useState(1);
 
     useEffect(() => {
         if(state?.success === false)
@@ -31,6 +37,39 @@ export default function MainForm()
             alert("Data saved successfully");
         }
     }, [state])
+
+    const addWrittenWorksFieldA = () => {
+        setFieldCountA(fieldCountA + 1);
+        console.log(fieldCountA);
+    }
+
+    const removeWrittenWorksFieldA = () => {
+        if(fieldCountA > 1){
+            setFieldCountA(fieldCountA - 1);
+        }
+    }
+
+    const addWrittenWorksFieldB = () => {
+        setFieldCountB(fieldCountB + 1);
+        console.log(fieldCountB);
+    }
+
+    const removeWrittenWorksFieldB = () => {
+        if(fieldCountB > 1){
+            setFieldCountB(fieldCountB - 1);
+        }
+    }
+
+    const addWrittenWorksFieldC = () => {
+        setFieldCountC(fieldCountC + 1);
+        console.log(fieldCountB);
+    }
+
+    const removeWrittenWorksFieldC = () => {
+        if(fieldCountC > 1){
+            setFieldCountC(fieldCountC - 1);
+        }
+    }
 
     return(
         <form action={action} className="w-full flex flex-col gap-5 bg-gray-300 shadow-md p-5 rounded-md">
@@ -49,33 +88,50 @@ export default function MainForm()
                 <legend className="font-bold text-lg bg-white p-2 rounded-md shadow-md">
                     Written Works
                 </legend>
-                <TextInput name="written-works-topic" label="Topic (Optional)" type="text"/>
-                <div className="flex flex-row gap-4 w-full">
-                    <TextInput name="written-works-score" label="Score" type="number"/>
-                    <TextInput name="written-works-items" label="No. of items" type="number"/>
+                <div className="max-w-md flex justify-around">
+                    <button type="button" onClick={addWrittenWorksFieldA} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Field</button>
+                    <button type="button" onClick={removeWrittenWorksFieldA} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove Field</button>
                 </div>
+                {Array.from({ length : fieldCountA }).map((_, index) => (
+                    <Fragment key={index}>
+                        <WrittenWorksField />
+                    </Fragment>
+                ))}
             </fieldset>
 
             <fieldset className="flex flex-col gap-4 w-full bg-slate-200 p-4 rounded-md shadow-md">
                 <legend className="font-bold text-lg bg-white p-2 rounded-md shadow-md">
                     Performance Task
                 </legend>
-                <TextInput name="perf-task-topic" label="Topic (Optional)" type="text"/>
-                <div className="flex flex-row gap-4 w-full">
-                    <TextInput name="perf-task-score" label="Score" type="number"/>
-                    <TextInput name="perf-task-items" label="No. of items" type="number"/>
+
+                <div className="max-w-md flex justify-around">
+                    <button type="button" onClick={addWrittenWorksFieldB} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Field</button>
+                    <button type="button" onClick={removeWrittenWorksFieldB} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove Field</button>
                 </div>
+                
+                {Array.from({ length : fieldCountB }).map((_, index) => (
+                    <Fragment key={index}>
+                        <PerfTaskField />
+                    </Fragment>
+                ))}
             </fieldset>
 
             <fieldset className="flex flex-col gap-4 w-full bg-slate-200 p-4 rounded-md shadow-md">
                 <legend className="font-bold text-lg bg-white p-2 rounded-md shadow-md">
                     Exam
                 </legend>
-                <TextInput name="exam-topic" label="Topic (Optional)" type="text"/>
-                <div className="flex flex-row gap-4 w-full">
-                    <TextInput name="exam-score" label="Score" type="number"/>
-                    <TextInput name="exam-items" label="No. of items" type="number"/>
+
+                <div className="max-w-md flex justify-around">
+                    <button type="button" onClick={addWrittenWorksFieldC} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Field</button>
+                    <button type="button" onClick={removeWrittenWorksFieldC} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove Field</button>
                 </div>
+
+                {Array.from({ length : fieldCountC }).map((_, index) => (
+                    <Fragment key={index}>
+                        <ExamField />
+                    </Fragment>
+                ))}
+                
             </fieldset>
 
             <div>

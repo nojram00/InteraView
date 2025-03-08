@@ -1,9 +1,16 @@
+import { ChangeEvent } from "react"
 
-export function TextInput({ name, label, type } : { name : string, label : string, type : string }) {
+export function TextInput({ name, label, type, onChange } : { name : string, label : string, type : string, onChange? : (e : ChangeEvent<HTMLInputElement>) => void }) {
     return(
         <div className="flex flex-col w-1/2 gap-2">
             <label htmlFor={name}>{label}</label>
-            <input type={type} name={name} className="rounded-md border-2 max-w-xl lg:max-w-sm w-full text-black"/>
+            <input onChange={(e) => 
+                {
+                    if(typeof onChange === 'function') {
+                        onChange(e)
+                    }
+                }
+            } type={type} name={name} className="rounded-md border-2 max-w-xl lg:max-w-sm w-full text-black"/>
         </div>
     )
 }
